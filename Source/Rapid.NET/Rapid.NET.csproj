@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>maxsgit1234</Authors>
+    <Description>A framework for scripting and rapid prototyping in .NET.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/maxsgit1234/Rapid.NET.Net</PackageProjectUrl>
+    <PackageTags>scripting prototyping</PackageTags>
+    <PackageId>Rapid.NET.Net</PackageId>
+    <Version>1.0.1</Version>
+    <Company />
+    <Product>maxsgit1234</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>
