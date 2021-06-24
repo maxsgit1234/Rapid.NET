@@ -52,7 +52,7 @@ namespace Examples
 
             public override string ToString()
             {
-                return JsonObj.Serialize(this);
+                return JsonObject.Serialize(this);
             }
         }
 

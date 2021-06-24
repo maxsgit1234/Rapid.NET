@@ -56,7 +56,7 @@ namespace Rapid.NET
 
             object argObj = null;
             if (args.Length > 1)
-                argObj = JsonObj.Deserialize(args[1], script.ArgumentType);
+                argObj = JsonObject.Deserialize(args[1], script.ArgumentType);
             
             script.Run(argObj);
         }

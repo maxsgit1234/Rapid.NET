@@ -30,12 +30,12 @@ namespace Rapid.NET.Wpf.Editors
 
         public object GetValue()
         {
-            return JsonObj.Deserialize(_Value.Text, _Type);
+            return JsonObject.Deserialize(_Value.Text, _Type);
         }
 
         public void SetValue(object newValue)
         {
-            _Value.Text = JsonObj.Serialize(newValue);
+            _Value.Text = JsonObject.Serialize(newValue);
         }
     }
 }

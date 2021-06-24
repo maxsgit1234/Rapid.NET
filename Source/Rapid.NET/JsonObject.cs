@@ -6,16 +6,16 @@ using System.Linq;
 
 namespace Rapid.NET
 {
-    public class JsonObj
+    public class JsonObject
     {
         public JsonElement Element;
 
-        public JsonObj(JsonElement element)
+        public JsonObject(JsonElement element)
         {
             Element = element;
         }
 
-        public JsonObj this[string key]
+        public JsonObject this[string key]
         {
             get
             {
@@ -27,9 +27,9 @@ namespace Rapid.NET
             }
         }
 
-        public JsonObj GetChild(params string[] keys)
+        public JsonObject GetChild(params string[] keys)
         {
-            JsonObj ret = this;
+            JsonObject ret = this;
             foreach (string key in keys)
             {
                 var items = ret.Objects();
@@ -41,7 +41,7 @@ namespace Rapid.NET
             return ret;
         }
 
-        public JsonObj this[int index]
+        public JsonObject this[int index]
         {
             get
             {
@@ -55,23 +55,23 @@ namespace Rapid.NET
 
         public JsonValueKind Kind { get { return Element.ValueKind; } }
 
-        public Dictionary<string, JsonObj> Objects()
+        public Dictionary<string, JsonObject> Objects()
         {
             if (Kind != JsonValueKind.Object)
                 return null;
 
-            var ret = new Dictionary<string, JsonObj>();
+            var ret = new Dictionary<string, JsonObject>();
             foreach (JsonProperty item in Element.EnumerateObject())
-                ret.Add(item.Name, new JsonObj(item.Value));
+                ret.Add(item.Name, new JsonObject(item.Value));
             return ret;
         }
 
-        public JsonObj[] Array()
+        public JsonObject[] Array()
         {
             if (Kind != JsonValueKind.Array)
                 return null;
 
-            return Element.EnumerateArray().Select(i => new JsonObj(i)).ToArray();
+            return Element.EnumerateArray().Select(i => new JsonObject(i)).ToArray();
         }
 
         public string String()
@@ -124,7 +124,7 @@ namespace Rapid.NET
             return JsonSerializer.Serialize(item, Options());
         }
 
-        public static JsonObj Parse(string text)
+        public static JsonObject Parse(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
                 return null;
@@ -132,7 +132,7 @@ namespace Rapid.NET
             JsonElement element = (JsonElement)JsonSerializer
                 .Deserialize<object>(text, Options());
 
-            return new JsonObj(element);
+            return new JsonObject(element);
         }
 
         public override string ToString()

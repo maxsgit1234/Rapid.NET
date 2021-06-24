@@ -54,7 +54,7 @@ namespace Rapid.NET.Wpf.Editors
         public object GetValue()
         {
             if (HasValue)
-                return JsonObj.Deserialize(_Value.Text, _Type);
+                return JsonObject.Deserialize(_Value.Text, _Type);
             else
                 return null;
         }
@@ -69,7 +69,7 @@ namespace Rapid.NET.Wpf.Editors
             else
             {
                 _ValChk.IsChecked = true;
-                _Value.Text = JsonObj.Serialize(value).Replace("\r\n", "");
+                _Value.Text = JsonObject.Serialize(value).Replace("\r\n", "");
             }
         }
     }

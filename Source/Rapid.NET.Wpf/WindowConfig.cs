@@ -38,7 +38,7 @@ namespace Rapid.NET.Wpf
             if (!File.Exists(file))
                 return new WindowConfig(new FileInfo(file), null);
 
-            Area a = JsonObj.Deserialize<Area>(File.ReadAllText(file));
+            Area a = JsonObject.Deserialize<Area>(File.ReadAllText(file));
             return new WindowConfig(new FileInfo(file), a);
         }
 
@@ -94,7 +94,7 @@ namespace Rapid.NET.Wpf
 
             if (!_File.Directory.Exists)
                 _File.Directory.Create();
-            File.WriteAllText(_File.FullName, JsonObj.Serialize(_Area));
+            File.WriteAllText(_File.FullName, JsonObject.Serialize(_Area));
         }
 
         private static FileInfo GetStandardFile()

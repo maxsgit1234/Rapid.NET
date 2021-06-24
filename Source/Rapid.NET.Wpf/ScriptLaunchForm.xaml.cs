@@ -20,9 +20,9 @@ using System.Windows.Shapes;
 namespace Rapid.NET.Wpf
 {
     /// <summary>
-    /// Interaction logic for ScriptSelectorTree.xaml
+    /// Interaction logic for ScriptLaunchForm.xaml
     /// </summary>
-    public partial class ScriptSelectorTree : UserControl
+    public partial class ScriptLaunchForm : UserControl
     {
         
         private readonly Dictionary<string, Script> _Scripts = new Dictionary<string, Script>();
@@ -34,7 +34,7 @@ namespace Rapid.NET.Wpf
         private readonly WindowConfig _Window;
         private readonly Window _Parent;
 
-        public ScriptSelectorTree(Window parent, 
+        public ScriptLaunchForm(Window parent, 
             List<Script> scripts, Action<string> w = null)
         {
             W = w;
@@ -225,7 +225,7 @@ namespace Rapid.NET.Wpf
             string argString = "";
             if (args != null)
             {
-                argString = JsonObj.Serialize(args)
+                argString = JsonObject.Serialize(args)
                     .Replace("\r\n", "").Replace("\"", "\"\"");
                 argString = "\"" + argString + "\"";
             }

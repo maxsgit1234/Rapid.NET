@@ -44,7 +44,7 @@ namespace Rapid.NET
                     + "' accepts more than one argument (only 0 or 1 is allowed)");
         }
 
-        public static ConstructorInfo GetScriptConstructor(TypeInfo ti)
+        private static ConstructorInfo GetScriptConstructor(TypeInfo ti)
         {
             ConstructorInfo[] all = ti.GetConstructors();
 

@@ -27,7 +27,7 @@ namespace Rapid.NET
 
         public void AddRun(string scriptName, object args)
         {
-            string jsonArgs = JsonObj.Serialize(args);
+            string jsonArgs = JsonObject.Serialize(args);
             ScriptInvocation invocation =
                 ScriptInvocation.Create(scriptName, jsonArgs);
 
@@ -87,7 +87,7 @@ namespace Rapid.NET
 
             try
             {
-                var items = JsonObj.Deserialize<
+                var items = JsonObject.Deserialize<
                     List<ScriptInvocation>>(File.ReadAllText(fi.FullName));
                 return new InvocationHistory(fi, items);
             }
@@ -111,7 +111,7 @@ namespace Rapid.NET
                 toSave = toSave.OrderByDescending(i => i.RunTime)
                     .Take(_MaxHistoryLength).ToList();
 
-            File.WriteAllText(fi.FullName, JsonObj.Serialize(toSave));
+            File.WriteAllText(fi.FullName, JsonObject.Serialize(toSave));
         }
 
         private static FileInfo GetStandardFile()

@@ -114,12 +114,12 @@ namespace Rapid.NET.Wpf.Editors
 
         public string GetString(object value)
         {
-            return JsonObj.Serialize(value);
+            return JsonObject.Serialize(value);
         }
 
         public object GetValue(string text)
         {
-            return JsonObj.Deserialize(text, _Type);
+            return JsonObject.Deserialize(text, _Type);
         }
     }
 
@@ -134,12 +134,12 @@ namespace Rapid.NET.Wpf.Editors
 
         public string GetString(object value)
         {
-            return JsonObj.Serialize(value).Replace("\r\n", "");
+            return JsonObject.Serialize(value).Replace("\r\n", "");
         }
 
         public object GetValue(string text)
         {
-            return JsonObj.Deserialize(text, _Type);
+            return JsonObject.Deserialize(text, _Type);
         }
     }
 

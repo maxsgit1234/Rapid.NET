@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Rapid.NET
 {
-    public class ScriptConstructorAttribute : Attribute
-    {   
+    public class ScriptAttribute : Attribute { }
 
-    }
+    public class ScriptConstructorAttribute : Attribute { }
 
     public class DocumentationAttribute : Attribute
     {

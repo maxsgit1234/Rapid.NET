@@ -128,7 +128,7 @@ namespace Rapid.NET.Wpf.Editors
 
             try
             {
-                object value = JsonObj.Deserialize(args, _ObjectType);
+                object value = JsonObject.Deserialize(args, _ObjectType);
                 SetValue(value);
             }
             catch (Exception ex)
