@@ -36,6 +36,39 @@ namespace Rapid.NET.Wpf.Editors
         private static readonly Type[] NUMERIC_TYPES = new Type[] { typeof(int), typeof(float), typeof(double) };
         private static readonly Type[] NULLABLE_NUMERIC_TYPES = new Type[] { typeof(int?), typeof(float?), typeof(double?) };
 
+        public static void TrySetValueFromArgs(
+            this IObjectEditor editor, string args, Type objectType)
+        {
+            if (args == null)
+                return;
+
+            try
+            {
+                object value = JsonObject.Deserialize(args, objectType);
+                editor.SetValue(value);
+            }
+            catch (Exception ex)
+            {
+                ScriptMethods.Warn("Could not set args for "
+                    + objectType + ": " + args + ": " + ex);
+            }
+        }
+
+        public static bool TryGetValue(this IObjectEditor editor, out object ret)
+        {
+            ret = null;
+            try
+            {
+                ret = editor.GetValue();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ScriptMethods.Warn("Could not get args from form input: " + ex);
+                return false;
+            }
+        }
+
         public static UserControl MakeEditor(Type type)
         {
 

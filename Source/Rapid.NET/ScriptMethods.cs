@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Rapid.NET
 {
-    public class ScriptMethods
+    public static class ScriptMethods
     {
+        
         public static void RunFromArgs(string[] args, 
             Action<List<Script>> runUI, Assembly assy = null)
         {
-            Console.WriteLine("args.Length = " + args.Length);
+            Print("args.Length = " + args.Length);
             foreach (string arg in args)
-                Console.WriteLine(arg);
+                Print(arg);
 
             if (assy == null)
                 assy = Assembly.GetEntryAssembly();
@@ -87,15 +88,15 @@ namespace Rapid.NET
 
             foreach (TypeInfo tt in assembly.ExportedTypes)
             {
-                TypeInfo ti = null;
-                try
-                {
-                    ti = tt.GetTypeInfo();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Failed for: " + tt.Name);
-                }
+                //TypeInfo ti = null;
+                //try
+                //{
+                TypeInfo ti = tt.GetTypeInfo();
+                //}
+                //catch (Exception ex)
+                //{
+                //    Warn("Failed for: " + tt.Name);
+                //}
 
                 if (ti == null)
                     continue;
@@ -107,7 +108,9 @@ namespace Rapid.NET
                 if (ti.IsAbstract)
                     continue;
 
-                Script s = new Script(ti);
+                if (!Script.TryCreateFromType(ti, out Script s))
+                    continue;
+
                 if (attType != null && !s.HasAttribute(attType))
                     continue;
 
@@ -118,5 +121,21 @@ namespace Rapid.NET
             return result;
         }
 
+        #region Simple static logging helpers...
+
+        public static Action<string> PrintMethod = null;
+        public static void Print(string s)
+        {
+            PrintMethod?.Invoke(s);
+        }
+
+        public static Action<string> WarnMethod = null;
+        public static void Warn(string s)
+        {
+            WarnMethod?.Invoke(s);
+        }
+
+        #endregion
     }
+
 }

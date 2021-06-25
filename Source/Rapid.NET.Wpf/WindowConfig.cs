@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -99,9 +100,13 @@ namespace Rapid.NET.Wpf
 
         private static FileInfo GetStandardFile()
         {
+            string root = ConfigurationManager.AppSettings.Get("RapidHistoryDir");
+            if (root == null)
+                root = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
             string assName = Assembly.GetEntryAssembly().GetName().Name;
-            return new FileInfo(Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.Desktop), 
+            return new FileInfo(Path.Combine(root, 
                 "Rapid.NET\\" + assName + "\\WindowConfig.json"));
         }
     }

@@ -1,0 +1,10 @@
+In order to deploy the NuGet packages, do the following:
+
+1. Rapid.NET: The .nupkg file is generated automatically upon building the project. The only thing to do is update the version number in the project file by using  Right Click -> Properties -> Package or by editing the .csproj directly.
+
+2. Rapid.NET.Wpf: The .nupkg file must be generated from the .nuspec file, which is already present in the repo: Source/Rapid.NET.Wpf/Rapid.NET.Wpf.nuspec. The version number must first be updated in the .csproj file however. In a command prompt, run:
+> path=%path%;[root-directory]\Resources
+> cd [root-directory]\Rapid.NET\Source\Rapid.NET.Wpf
+> nuget pack Rapid.NET.Wpf.nuspec
+
+After both .nupkg files are created, simply upload them to nuget.org by signing in as maxsgit.

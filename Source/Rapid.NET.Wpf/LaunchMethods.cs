@@ -18,7 +18,7 @@ namespace Rapid.NET.Wpf
         private static void RunUI(List<Script> scripts)
         {
             Window w = new Window();
-            var tree = new ScriptLaunchForm(w, scripts, Console.WriteLine);
+            var tree = new ScriptLaunchForm(w, scripts);
             w.Content = tree;
             w.ShowDialog();
         }

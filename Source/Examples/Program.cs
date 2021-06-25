@@ -23,7 +23,7 @@ namespace Examples
     //    }
     //}
 
-    public class MyFilteringAttribute : Attribute { }
+    
 
     
     class Program
@@ -31,42 +31,15 @@ namespace Examples
         [STAThread]
         static void Main(string[] args)
         {
+            ScriptMethods.PrintMethod = TimestampedPrinter.Print;
+            ScriptMethods.WarnMethod = s => TimestampedPrinter.Print("WARNING: " + s);
+
             LaunchMethods.RunFromArgs(args);
-        }
-    }
 
-    [Script]
-    [MyFiltering]
-    public class MySimpleScript
-    {
-        public MySimpleScript()
-        {
-            Console.WriteLine("This is a super simple script!");
             Console.WriteLine("Press ENTER to exit.");
             Console.ReadLine();
         }
-    }
 
-    [Script]
-    public class MyScriptWithArgs
-    {
-        public class Config
-        {
-            public int MyInt = 3;
-            public string MyString = "adsf";
-
-            public override string ToString()
-            {
-                return "MyInt = " + MyInt + " | MyString = " + MyString;
-            }
-        }
-
-        public MyScriptWithArgs(Config cfg)
-        {
-            Console.WriteLine("Script was run with argument: " + cfg);
-            Console.WriteLine("Press ENTER to exit.");
-            Console.ReadLine();
-        }
     }
 
 

@@ -16,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Rapid.NET.ScriptMethods;
+
 
 namespace Rapid.NET.Wpf
 {
@@ -24,23 +26,18 @@ namespace Rapid.NET.Wpf
     /// </summary>
     public partial class ScriptLaunchForm : UserControl
     {
-        
         private readonly Dictionary<string, Script> _Scripts = new Dictionary<string, Script>();
         private readonly Dictionary<Script, ScriptNode> _Nodes = new Dictionary<Script, ScriptNode>();
 
-        private readonly Action<string> W;
-
+        
         private readonly InvocationHistory _History;
         private readonly WindowConfig _Window;
         private readonly Window _Parent;
 
         public ScriptLaunchForm(Window parent, 
-            List<Script> scripts, Action<string> w = null)
+            List<Script> scripts)
         {
-            W = w;
-            if (W == null)
-                W = _ => { };
-
+            
             _Parent = parent;
             _Scripts = scripts.OrderBy(s => s.FullName).ToDictionary(s => s.FullName, s => s);
             _History = InvocationHistory.FromFile(null);
@@ -50,7 +47,7 @@ namespace Rapid.NET.Wpf
             InitializeComponent();
         }
 
-        private DictionaryEditor _ArgEditor;
+        private IObjectEditor _ArgEditor;
         private Script _Selected;
 
         private void ScriptSelectorTree_Initialized(object sender, EventArgs e)
@@ -157,27 +154,30 @@ namespace Rapid.NET.Wpf
             }
         }
 
-        //public event Action Cancel;
-
         private void _RunPanel_Cancel()
         {
-            W("Script Selection UI was canceled.");
+            Print("Script Selection UI was canceled.");
             _Parent.Close();
-            //Cancel?.Invoke();
         }
 
         private void _RunPanel_Run(bool newProcess, bool newThread)
         {
             if (_Selected == null)
             {
-                W("Cannot run script because none is selected.");
+                Warn("Cannot run script because none is selected.");
                 return;
             }
 
-            W("Attempting to run script: " + _Selected.FullName);
+            Print("Attempting to run script: " + _Selected.FullName);
             object arg = null;
             if (_ArgEditor != null)
-                arg = _ArgEditor.GetValue();
+            {
+                if (!_ArgEditor.TryGetValue(out arg))
+                {
+                    Warn("Script execution canceled because of invalid arguments.");
+                    return;
+                }
+            }
 
             _History.AddRun(_Selected.FullName, arg);
             _History.WriteToFile();
@@ -186,14 +186,14 @@ namespace Rapid.NET.Wpf
 
             if (newProcess)
             {
-                W("Launching new process to run script.");
+                Print("Launching new process to run script.");
                 RunInNewProcess(_Selected, arg);
             }
             else if (newThread)
             {
                 var t = new Thread(() =>
                 {
-                    W("Running script in new thread: " + _Selected.FullName);
+                    Print("Running script in new thread: " + _Selected.FullName);
                     try
                     {
                         _Selected.Run(arg);
@@ -206,15 +206,15 @@ namespace Rapid.NET.Wpf
                     {
                         Console.Error.WriteLine(ex);
                     }
-                    W("Script thread ran to completion: " + _Selected.FullName);
+                    Print("Script thread ran to completion: " + _Selected.FullName);
                 });
                 t.Start();
             }
             else
             {
-                W("Running script in current thread.");
+                Print("Running script in current thread.");
                 _Selected.Run(arg);
-                W("Script ran to completion.");
+                Print("Script ran to completion.");
             }
         }
 
@@ -288,7 +288,7 @@ namespace Rapid.NET.Wpf
             _ScriptName.Content = item.FullName;
 
             PopulateArgs(last);
-            W("Selected item: " + _Selected.FullName);
+            Print("Selected item: " + _Selected.FullName);
         }
 
         private void PopulateArgs(ScriptInvocation last)
@@ -299,15 +299,16 @@ namespace Rapid.NET.Wpf
 
             if (_ArgEditor != null)
             {
-                _ArgStack.Children.Remove(_ArgEditor);
+                _ArgStack.Children.Remove(_ArgEditor as UserControl);
                 _ArgEditor = null;
             }
 
             if (_Selected.ArgumentType != null)
             {
-                _ArgEditor = new DictionaryEditor(_Selected.ArgumentType);
-                _ArgEditor.TrySetValueFromArgs(args);
-                _ArgStack.Children.Add(_ArgEditor);
+                _ArgEditor = ObjectEditors.MakeEditor(_Selected.ArgumentType) as IObjectEditor;
+                //_ArgEditor = new DictionaryEditor();
+                _ArgEditor.TrySetValueFromArgs(args, _Selected.ArgumentType);
+                _ArgStack.Children.Add(_ArgEditor as UserControl);
             }
         }
 

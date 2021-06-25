@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using System.Reflection;
+using System.Configuration;
 
 namespace Rapid.NET
 {
@@ -116,10 +117,13 @@ namespace Rapid.NET
 
         private static FileInfo GetStandardFile()
         {
+            string root = ConfigurationManager.AppSettings.Get("RapidHistoryDir");
+            if (root == null)
+                root = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
             string assName = Assembly.GetEntryAssembly().GetName().Name;
-            return new FileInfo(Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.Desktop),
-                    "Rapid.NET\\" + assName + "\\ScriptHistory.json"));
+            return new FileInfo(Path.Combine(root,
+                "Rapid.NET\\" + assName + "\\ScriptHistory.json"));
         }
 
     }

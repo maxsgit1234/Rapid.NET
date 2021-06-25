@@ -1,5 +1,5 @@
-# Rapid.NET.Net
-A framework for scripting and rapid-prototyping in .NET.
+# Rapid.NET
+*A framework for scripting and rapid-prototyping in .NET.*
 
 The goal of Rapid.NET.Net is to make C# (and other .NET languages) more accessible for rapid-prototyping and scripting for more people around the world. Up until now, in order to make even the simplest C# applications, people typically create a whole new project that essentially just acts as an entry-point to their class libraries. This is cumbersome, leads to bloated solutions, and generally deters scripting behavior that would otherwise be highly advantageous.
 
@@ -15,6 +15,10 @@ Rapid.NET.Net allows you to create a single one-line project that acts as an "en
 
 To start creating and launching scripts with Rapid.NET.Net using the WPF UI, do the following:
 
+- Install the NuGet packages to your .NET Framework project:
+
+  - TODO
+  
 - In the `Main` method of your project, write:
 
   ```c#
@@ -44,7 +48,7 @@ To start creating and launching scripts with Rapid.NET.Net using the WPF UI, do 
 
 ## How it works
 
-Rapid.NET.Net use `System.Reflection` to inspect your project(s) for classes you've written that have the `[Script]` attribute applied. Optional JSON-serialized arguments (input either via command line or the WPF UI) are then fed to your script's constructor, thereby invoking whatever code you've placed in there. 
+Rapid.NET.Net use `System.Reflection` to inspect your project(s) for classes you've written that have the `[Script]` attribute applied. Optional JSON-serialized arguments (input either via command line or the WPF UI) are then fed to a special static method defined in your script class called `Run()`, thereby invoking whatever code you've placed in there. Note: The Run() method can have either 0 or 1 input arguments.
 
 For example, consider a console application called Examples.exe with the following `Main` method and script class definition:
 
@@ -63,7 +67,7 @@ namespace Examples
 	[Script]
     public class MySimpleScript 
     {
-        public MySimpleScript() 
+        public static void Run() 
         {
             Console.WriteLine("This is a super simple script!");
             Console.WriteLine("Press ENTER to exit.");
@@ -73,7 +77,7 @@ namespace Examples
 }
 ```
 
-The `MySimpleScript` code can be invoked like so:
+The `MySimpleScript.Run()` method can be invoked like so:
 
 ```
 >Examples.exe Examples.MySimpleScript
@@ -82,7 +86,7 @@ This is a super simple script!
 Press ENTER to exit.
 ```
 
-You can also define a script that accepts arguments by defining a single constructor that accepts 1 argument like so:
+You can also define a script that accepts arguments by defining your `Run` method to accept a single argument like so:
 
 ```c#
 [Script]
@@ -92,14 +96,9 @@ public class MyScriptWithArgs
     {
         public int MyInt = 3;
         public string MyString = "adsf";
-
-		public override string ToString()
-        {
-            return "MyInt = " + MyInt + " | MyString = " + MyString;
-        }
     }
 
-    public MyScriptWithArgs(Config cfg)
+    public static void Run(Config cfg)
     {
         Console.WriteLine("Script was run with argument: " cfg);
         Console.WriteLine("Press ENTER to exit.");
@@ -146,7 +145,17 @@ Each time a script is executed via the UI, the window location and size is also 
 
 Either or both of these files can be deleted anytime.
 
-TODO: Config file for specifying the history directory, and to bypass history altogether.
+NOTE: The folder location for the history .json files can be updated by adding a `RapidHistoryDir` key to your project's App.config file:
+
+```xml
+<configuration>
+	<appSettings>
+    	<add key="RapidHistoryDir" value="C:\MyFolder"/>
+	</appSettings>
+</configuration>
+```
+
+
 
 ## Attribute Filtering
 
@@ -155,7 +164,7 @@ If you want to launch a UI with only a subset of your script library, you can do
 ```C#
 public class MyFilteringAttribute : Attribute {}
 
-[MyFiltering]
+[Script, MyFiltering]
 public class MySimpleScript { ... }
 ```
 
