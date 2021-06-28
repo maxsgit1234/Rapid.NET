@@ -17,8 +17,14 @@ To start creating and launching scripts with Rapid.NET.Net using the WPF UI, do 
 
 - Install the NuGet packages to your .NET Framework project:
 
-  - TODO
-  
+
+```shell
+PM> Install-Package Rapid.NET
+PM> Install-Package Rapid.NET.Wpf
+```
+
+
+
 - In the `Main` method of your project, write:
 
   ```c#
