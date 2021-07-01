@@ -2,13 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Rapid.NET.Wpf</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>Rapid.NET.Wpf</title>
     <authors>maxsgit1234</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A WPF UI for scripting and rapid prototyping in .NET.</description>
     <copyright>Copyright ©  2021</copyright>
 	<license type="expression">MIT</license>
-    <dependencies />
+    <dependencies>
+		<group targetFramework=".NETFramework4.8" />
+	</dependencies>
   </metadata>
 </package>

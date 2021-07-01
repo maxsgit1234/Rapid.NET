@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapid.NET", "Rapid.NET\Rapi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rapid.NET.Wpf", "Rapid.NET.Wpf\Rapid.NET.Wpf.csproj", "{1BDE8D7D-67A8-48D3-9745-C6404A8F1991}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rapid.NET.Core", "Rapid.NET.Core\Rapid.NET.Core.csproj", "{E78FC975-E2BF-4F02-8C88-ACB67CDA56A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1BDE8D7D-67A8-48D3-9745-C6404A8F1991}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BDE8D7D-67A8-48D3-9745-C6404A8F1991}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BDE8D7D-67A8-48D3-9745-C6404A8F1991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E78FC975-E2BF-4F02-8C88-ACB67CDA56A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E78FC975-E2BF-4F02-8C88-ACB67CDA56A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E78FC975-E2BF-4F02-8C88-ACB67CDA56A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E78FC975-E2BF-4F02-8C88-ACB67CDA56A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

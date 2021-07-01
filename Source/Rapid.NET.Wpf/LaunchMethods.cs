@@ -10,6 +10,11 @@ namespace Rapid.NET.Wpf
 {
     public class LaunchMethods
     {
+        public static void PrintHello()
+        {
+            Console.WriteLine("Hello from a WPF framework project method!");
+        }
+
         public static void RunFromArgs(string[] args, Assembly assy = null)
         {
             ScriptMethods.RunFromArgs(args, RunUI, assy);

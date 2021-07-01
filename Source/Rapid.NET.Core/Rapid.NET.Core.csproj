@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+	<UseWPF>true</UseWPF>
+	<DisableWinExeOutputInference>true</DisableWinExeOutputInference>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<Version>1.0.2</Version>
+	<Authors>maxsgit1234</Authors>
+	<Company>maxsgit1234</Company>
+	<Description>A WPF UI for scripting and rapid prototyping in .NET 5.0.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rapid.NET.Wpf\Rapid.NET.Wpf.csproj" />
+    <ProjectReference Include="..\Rapid.NET\Rapid.NET.csproj" />
+  </ItemGroup>
+
+</Project>
