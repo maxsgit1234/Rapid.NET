@@ -26,6 +26,7 @@ namespace Rapid.NET.Wpf
         private void RunPanel_Initialized(object sender, EventArgs e)
         {
             Orientation = Orientation.Horizontal;
+            HorizontalAlignment = HorizontalAlignment.Right;
 
             _NewProcessChk = new CheckBox { Content = "New Process", IsChecked = false };
             _NewThreadChk = new CheckBox { Content = "New Thread", IsChecked = false };

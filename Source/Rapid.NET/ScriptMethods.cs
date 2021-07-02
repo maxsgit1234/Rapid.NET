@@ -9,9 +9,32 @@ namespace Rapid.NET
 {
     public static class ScriptMethods
     {
-        
+        /// <summary>
+        /// Executes your script's Run(...) method given the input command 
+        /// line arguments. Usage information:
+        ///  - If args has length 0, the runUI() delegate will be invoked.
+        ///  - If the first argument in wrapped in square brackets "[...]",
+        ///    then it is taken to be the name of an attribute to use to filter
+        ///    potential scripts from the input assembly.
+        ///  - Otherwise, the first (or next) argument is taken to be the name
+        ///    of a script to execute, if found in the input assembly.
+        ///  - If there is a subsequent argument, it is interpreted as an 
+        ///    argument to be supplied to the Run(...) method of your script.
+        ///    If the argument is a filename, the file is read as JSON and 
+        ///    converted to an object. Otherwise, the argument is interpreted
+        ///    as JSON text itself.
+        /// 
+        /// </summary>
+        /// <param name="args">See summary for usage notes.</param>
+        /// <param name="runUI">A method to be called to launch a UI to 
+        /// manually select a script to execute, if no arguments are supplied.</param>
+        /// <param name="readJsonFile">A method to search for and read a file 
+        /// containing JSON text representing the input arguments to supply 
+        /// to your script's Run(...) method.</param>
+        /// <param name="assy">An assembly to search for your script classes.</param>
         public static void RunFromArgs(string[] args, 
-            Action<List<Script>> runUI, Assembly assy = null)
+            Action<List<Script>> runUI, Func<string, string> readJsonFile,
+            Assembly assy = null)
         {
             Print("args.Length = " + args.Length);
             foreach (string arg in args)
@@ -25,9 +48,33 @@ namespace Rapid.NET
             List<Script> scripts = ListFromAssembly(assy, attType);
 
             if (args.Length > 0)
-                RunDirect(args, scripts);
+                RunDirect(args, scripts, readJsonFile);
             else
                 runUI(scripts);
+        }
+
+        public static void RunDirect(string[] args, List<Script> scripts,
+            Func<string, string> readJsonFile)
+        {
+            if (args.Length == 0)
+                throw new Exception("Type-of-script argument missing!");
+
+            Script script = GetMatchingScript(args[0], scripts);
+
+            if (script == null)
+                throw new Exception("Unable to find a matching script for " + args[0]);
+
+            object argObj = null;
+            if (args.Length > 1)
+            {
+                string json = readJsonFile(args[1]);
+                if (json != null)
+                    argObj = JsonObject.Deserialize(json, script.ArgumentType);
+                else
+                    argObj = JsonObject.Deserialize(args[1], script.ArgumentType);
+            }
+            
+            script.Run(argObj);
         }
 
         private static string[] TryParseAttribute(Assembly assy,
@@ -45,22 +92,6 @@ namespace Rapid.NET
             return args.Skip(1).ToArray();
         }
 
-        public static void RunDirect(string[] args, List<Script> scripts)
-        {
-            if (args.Length == 0)
-                throw new Exception("Type-of-script argument missing!");
-
-            Script script = GetMatchingScript(args[0], scripts);
-
-            if (script == null)
-                throw new Exception("Unable to find a matching script for " + args[0]);
-
-            object argObj = null;
-            if (args.Length > 1)
-                argObj = JsonObject.Deserialize(args[1], script.ArgumentType);
-            
-            script.Run(argObj);
-        }
 
         public static Script GetMatchingScript(string arg, List<Script> scripts)
         {
@@ -81,6 +112,14 @@ namespace Rapid.NET
             return null;
         }
 
+        /// <summary>
+        /// Enumerates all valid script classes defined in the supplied assembly.
+        /// </summary>
+        /// <param name="assembly">An assembly to search for your script classes.</param>
+        /// <param name="attType">If non-null, the type of an attribute to use 
+        /// to filter your set of scripts. Only script classes with this 
+        /// attribute applied will be listed.</param>
+        /// <returns></returns>
         public static List<Script> ListFromAssembly(
             Assembly assembly, Type attType = null)
         {

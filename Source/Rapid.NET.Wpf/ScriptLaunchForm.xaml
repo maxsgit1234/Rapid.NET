@@ -9,35 +9,64 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"></ColumnDefinition>
-            <ColumnDefinition Width="200*"></ColumnDefinition>
+            <ColumnDefinition Width="150*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="5">
-            <Label FontWeight="Bold" Margin="0,10,0,0">Recent Scripts</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+        </ScrollViewer>-->
+        
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="5">
+            <Label FontWeight="Bold" Margin="0,0,0,0">Recent Scripts</Label>
             <ComboBox Name="_RecentCombo"></ComboBox>
-            <Label FontWeight="Bold" Margin="0,10,0,0">All Scripts</Label>
-            <TreeView Name="_ScriptTree"></TreeView>
         </StackPanel>
-        <DockPanel Name="_ExecuteStack" Grid.Column="1" Margin="5">
-            <local:RunPanel x:Name="_RunPanel" DockPanel.Dock="Bottom" Margin="10"></local:RunPanel>
-            <StackPanel DockPanel.Dock="Top" >
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Label FontWeight="Bold">Previous Invocations</Label>
-                    <Label Name="_ScriptName">[Script Name]</Label>
+        
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="5">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                <Label FontWeight="Bold">Previous Invocations</Label>
+                <Label Name="_ScriptName">[Script Name]</Label>
+            </StackPanel>
+            <ComboBox Name="_PrevRuns"></ComboBox>
+        </StackPanel>
+        
+        <GroupBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="5">
+            <GroupBox.Header>
+                <Label FontWeight="Bold">All Scripts</Label>
+            </GroupBox.Header>
+            <TreeView Name="_ScriptTree"></TreeView>
+        </GroupBox>
+
+        <GroupBox Grid.Column="1" Grid.Row="1" Margin="5">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontWeight="Bold">Arguments</Label>
+                    <Label FontWeight="Bold" Name="_ArgTypeLbl">{}</Label>
                 </StackPanel>
-                <ComboBox Name="_PrevRuns"></ComboBox>
-                <!--<Label FontWeight="Bold" Margin="0">Arguments</Label>-->
-                <GroupBox>
-                    <GroupBox.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label FontWeight="Bold">Arguments</Label>
-                            <Label FontWeight="Bold" Name="_ArgTypeLbl">{}</Label>
-                        </StackPanel>
-                    </GroupBox.Header>
-                    <StackPanel Name="_ArgStack" Margin="0" Background="AliceBlue"></StackPanel>
-                </GroupBox>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Label Name="_ScriptDocLbl" Visibility="Collapsed" Grid.Row="0"></Label>
+                <ScrollViewer  Name="_ArgStack" Margin="0" Background="AliceBlue" Grid.Row="1">
+                </ScrollViewer>
+            </Grid>
+        </GroupBox>
+
+        <local:RunPanel x:Name="_RunPanel" Grid.Column="1" Grid.Row="2" Margin="10"></local:RunPanel>
+
+        <!--<DockPanel Name="_ExecuteStack"Margin="5">
+            <StackPanel DockPanel.Dock="Top">
+                --><!--<Label FontWeight="Bold" Margin="0">Arguments</Label>--><!--
             </StackPanel>
         </DockPanel>
-        <!--<Canvas Name="_ArgCanvas" Grid.Column="1"></Canvas>-->
+        --><!--<Canvas Name="_ArgCanvas" Grid.Column="1"></Canvas>-->
     </Grid>
 </UserControl>

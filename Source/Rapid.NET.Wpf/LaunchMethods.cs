@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -17,9 +18,17 @@ namespace Rapid.NET.Wpf
 
         public static void RunFromArgs(string[] args, Assembly assy = null)
         {
-            ScriptMethods.RunFromArgs(args, RunUI, assy);
+            ScriptMethods.RunFromArgs(args, RunUI, ReadFileIfExists, assy);
         }
-        
+
+        private static string ReadFileIfExists(string file)
+        {
+            if (File.Exists(file))
+                return File.ReadAllText(file);
+            else
+                return null;
+        }
+
         private static void RunUI(List<Script> scripts)
         {
             Window w = new Window();

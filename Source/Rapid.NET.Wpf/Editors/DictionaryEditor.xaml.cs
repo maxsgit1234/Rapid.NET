@@ -169,9 +169,14 @@ namespace Rapid.NET.Wpf.Editors
 
                 var label = new Label()
                 {
-                    Content = kvp.Value.Field.Name + " (" 
+                    Content = kvp.Value.Field.Name + " ("
                     + kvp.Value.Field.FieldType.NiceName() + ")",
                 };
+
+                Label dlbl = null;
+                if (kvp.Value.Documentation != null)
+                    dlbl = new Label { Content = kvp.Value.Documentation.Description };
+
 
                 label.FontWeight = FontWeights.Bold;
                 if (!kvp.Value.Field.IsPublic)
@@ -180,23 +185,31 @@ namespace Rapid.NET.Wpf.Editors
 
                 //if (control is DictionaryEditor)
                 //{
-                    Border b = new Border();
-                    b.BorderThickness = new Thickness(1, 0, 0, 0);
-                    b.BorderBrush = Brushes.Gray;
-                    StackPanel panel = new StackPanel();
-                    b.Child = panel;
-                    //panel.Background = Brushes.LightGray;
-                    panel.Margin = new Thickness(10, 0, 0, 0);
+                Border b = new Border();
+                b.BorderThickness = new Thickness(1, 0, 0, 0);
+                b.BorderBrush = Brushes.Gray;
+                StackPanel panel = new StackPanel();
+                b.Child = panel;
+                //panel.Background = Brushes.LightGray;
+                panel.Margin = new Thickness(10, 0, 0, 0);
+                if (dlbl == null)
                     panel.Children.Add(label);
-                    panel.Children.Add(control);
-                    _Stack.Children.Add(b);
+                else
+                {
+                    StackPanel row = new StackPanel { Orientation = Orientation.Horizontal };
+                    row.Children.Add(label);
+                    row.Children.Add(dlbl);
+                    panel.Children.Add(row);
+                }
+                panel.Children.Add(control);
+                _Stack.Children.Add(b);
                 //}
                 //else
                 //{
                 //    _Stack.Children.Add(label);
                 //    _Stack.Children.Add(control);
                 //}
-                
+
 
                 //if (kvp.Value.Documentation != null)
                 //{

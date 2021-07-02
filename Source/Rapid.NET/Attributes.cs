@@ -7,10 +7,19 @@ using System.Threading.Tasks;
 
 namespace Rapid.NET
 {
+    /// <summary>
+    /// Annotate your Script class with this attribute in order to declare 
+    /// that it can be run as a script. Your script class will also need to
+    /// add a "public static void Run(...);" with either 0 or 1 arguments
+    /// in order to be executed as a script.
+    /// </summary>
     public class ScriptAttribute : Attribute { }
 
-    public class ScriptConstructorAttribute : Attribute { }
-
+    /// <summary>
+    /// Annotate your script class, or any field of your Run(...) method's
+    /// input argument with this attribute to display documentation in the
+    /// script-launcher UI.
+    /// </summary>
     public class DocumentationAttribute : Attribute
     {
         public readonly string Description;

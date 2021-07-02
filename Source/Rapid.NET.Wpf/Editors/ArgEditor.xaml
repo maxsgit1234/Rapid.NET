@@ -9,7 +9,7 @@
     <Grid>
         <DockPanel>
             <CheckBox Name="_ValChk" DockPanel.Dock="Left" VerticalAlignment="Center" ></CheckBox>
-            <TextBox Name="_Value" DockPanel.Dock="Right" Margin="10,0,10,0"></TextBox>
+            <TextBox Name="_Value" VerticalAlignment="Center" DockPanel.Dock="Right" Margin="10,0,10,0"></TextBox>
         </DockPanel>
     </Grid>
 </UserControl>

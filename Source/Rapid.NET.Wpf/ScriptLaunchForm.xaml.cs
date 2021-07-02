@@ -86,7 +86,15 @@ namespace Rapid.NET.Wpf
                 if (k < toBold)
                 {
                     if (_Nodes.TryGetValue(s, out ScriptNode sn))
+                    {
                         sn.Label.FontWeight = FontWeights.Bold;
+                        GroupNode parent = sn.Parent as GroupNode;
+                        while (parent != null)
+                        {
+                            parent.Label.FontWeight = FontWeights.Bold;
+                            parent = parent.Parent as GroupNode;
+                        }
+                    }
                 }
                 k++;
             }
@@ -259,7 +267,20 @@ namespace Rapid.NET.Wpf
             _Selected = item;
             _ArgTypeLbl.Content = _Selected.ArgumentType == null ? "(none)" :
                 "{" + _Selected.ArgumentType.NiceName() + "}";
-            
+
+            DocumentationAttribute doc = item.HostClass
+                .GetCustomAttribute<DocumentationAttribute>();
+            if (doc == null)
+            {
+                _ScriptDocLbl.Content = "";
+                _ScriptDocLbl.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                _ScriptDocLbl.Content = doc.Description;
+                _ScriptDocLbl.Visibility = Visibility.Visible;
+            }
+
             if (_RecentCombo.SelectedItem == null)
             {
                 if (_RecentScripts.Any(i => i.Value == item))
@@ -278,7 +299,13 @@ namespace Rapid.NET.Wpf
             foreach (ScriptInvocation p in prev)
             {
                 ComboBoxItem pi = new ComboBoxItem();
-                pi.Content = p.HistoryString();
+                //pi.Content = p.HistoryString();
+
+                StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
+                Label lbl = new Label { Content = p.HistoryString() };
+                panel.Children.Add(lbl);
+                pi.Content = panel;
+
                 _PrevArgs.Add(pi, p);
                 _PrevRuns.Items.Add(pi);
             }
@@ -299,7 +326,7 @@ namespace Rapid.NET.Wpf
 
             if (_ArgEditor != null)
             {
-                _ArgStack.Children.Remove(_ArgEditor as UserControl);
+                _ArgStack.Content = null;
                 _ArgEditor = null;
             }
 
@@ -308,7 +335,7 @@ namespace Rapid.NET.Wpf
                 _ArgEditor = ObjectEditors.MakeEditor(_Selected.ArgumentType) as IObjectEditor;
                 //_ArgEditor = new DictionaryEditor();
                 _ArgEditor.TrySetValueFromArgs(args, _Selected.ArgumentType);
-                _ArgStack.Children.Add(_ArgEditor as UserControl);
+                _ArgStack.Content = _ArgEditor as UserControl;
             }
         }
 
@@ -352,9 +379,12 @@ namespace Rapid.NET.Wpf
 
     public class GroupNode : TreeViewItem
     {
+        public readonly Label Label;
+
         public GroupNode(string name)
         {
-            Header = name;
+            Label = new Label { Content = name };
+            Header = Label;
         }
     }
 

@@ -41,6 +41,7 @@ namespace Examples.Arguments
     {
         public class Config
         {
+            [Documentation("This is a config value with documentation!")]
             public int MyInt = 3;
             public string MyString = "adsf";
 
@@ -61,6 +62,7 @@ namespace Examples.Arguments
     /// data types.
     /// </summary>
     [Script]
+    [Documentation("This is documentation for the script!")]
     public class ScriptWithComplexArguments
     {
         public class Config
