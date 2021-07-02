@@ -6,10 +6,12 @@
 	<UseWPF>true</UseWPF>
 	<DisableWinExeOutputInference>true</DisableWinExeOutputInference>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<Version>1.0.2</Version>
+	<Version>1.0.5</Version>
 	<Authors>maxsgit1234</Authors>
 	<Company>maxsgit1234</Company>
 	<Description>A WPF UI for scripting and rapid prototyping in .NET 5.0.</Description>
+	<PackageProjectUrl>https://github.com/maxsgit1234/Rapid.NET</PackageProjectUrl>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

@@ -16,20 +16,14 @@ Rapid.NET allows you to create a single one-line project that acts as an "entry-
 To start creating and launching scripts with Rapid.NET using the WPF UI, do the following:
 
 - Install the NuGet packages to your .NET Framework project:
-
-
-```shell
-PM> Install-Package Rapid.NET.Wpf  // for .NET Framework 4.6.1 projects and later
-PM> Install-Package Rapid.NET.Core // for .NET 5.0 projects and later.
-```
-
-
+  `PM> Install-Package Rapid.NET.Wpf` (for .NET Framework 4.6.1 projects or later)
+  `PM> Install-Package Rapid.NET.Core` (for .NET 5.0 projects or later)
 
 - In the `Main` method of your project, write:
 
   ```c#
   using Rapid.NET;
-  using Rapid.NET.Wpf; // or using Rapid.NET.Core if in a .NET 5.0 project.
+  using Rapid.NET.Wpf; // or 'using Rapid.NET.Core' if in a .NET 5.0 project.
   ...
       
   [STAThread]
@@ -157,7 +151,7 @@ Practically speaking, the WPF UI is what makes the Rapid.NET package so useful. 
 5. When a script is selected from the left pane, contains a history of executions of the specified script.
    1. Selecting an item from this list will populate the arguments form to match that prior execution.
 
-![test](Resources/UI_Screenshot.PNG "UI Screenshot")
+![ScreenShotUI](https://raw.githubusercontent.com/maxsgit1234/Rapid.NET/main/Resources/UI_Screenshot.PNG)
 
 
 
