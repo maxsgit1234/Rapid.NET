@@ -12,7 +12,7 @@ namespace DeployNuget
     {
         static void Main(string[] args)
         {
-            string version = "1.0.5";
+            string version = "1.0.6";
             string rapidDir = Path.GetFullPath(@"..\..\..\..\..");
             string slnFile = rapidDir + "\\Source\\Rapid.NET.sln";
             string stdFile = rapidDir + "\\Source\\Rapid.NET\\Rapid.NET.csproj";
