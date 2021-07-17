@@ -11,6 +11,7 @@
 	<license type="expression">MIT</license>
     <dependencies>
 		<group targetFramework=".NETFramework4.6.1" />
+		<dependency id="Rapid.NET" version="1.0.6" />
 	</dependencies>
   </metadata>
 </package>
