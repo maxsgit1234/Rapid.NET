@@ -10,6 +10,10 @@ namespace Rapid.NET
 {
     public class Script
     {
+        public static event Action<Script, object> ScriptExecutionBegan;
+        public static event Action<Script, object> ScriptExecutionComplete;
+
+
         public readonly TypeInfo HostClass;
         public readonly Type ArgumentType;
         public readonly DocumentationAttribute Documentation;
@@ -96,6 +100,7 @@ namespace Rapid.NET
 
         public void Run(object args = null)
         {
+            ScriptExecutionBegan?.Invoke(this, args);
             //if (ArgumentType == null)
             //    _Constructor.Invoke(new object[] { });
             //else
@@ -109,6 +114,8 @@ namespace Rapid.NET
             {
                 _RunMethod.Invoke(null, new object[] { args });
             }
+
+            ScriptExecutionComplete?.Invoke(this, args);
         }
 
         public override string ToString()

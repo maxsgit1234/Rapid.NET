@@ -53,7 +53,7 @@ namespace Examples.Arguments
 
         public static void Run(Config cfg)
         {
-            Console.WriteLine("Running script with custom argument: " + cfg);
+            Console.WriteLine("Running script with custom arguments: " + cfg);
         }
     }
 

@@ -20,4 +20,18 @@ namespace Examples
             Console.WriteLine("Hello world from within a script!");
         }
     }
+
+    [Script]
+    public class SayHelloExample
+    {
+        public class Config
+        {
+            public string Name = "Maxx";
+        }
+
+        public static void Run(Config cfg)
+        {
+            Console.WriteLine("Hello, there " + cfg.Name + "!");
+        }
+    }
 }

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Rapid.NET.Wpf</id>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <title>Rapid.NET.Wpf</title>
     <authors>maxsgit1234</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,7 +11,6 @@
 	<license type="expression">MIT</license>
     <dependencies>
 		<group targetFramework=".NETFramework4.6.1" />
-		<dependency id="Rapid.NET" version="1.0.6" />
 	</dependencies>
   </metadata>
 </package>
