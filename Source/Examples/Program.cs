@@ -16,7 +16,12 @@ namespace Examples
         [STAThread]
         static void Main(string[] args)
         {
-            LaunchMethods.RunFromArgs(args);
+            string assName = @"C:\Users\Maxx\Documents\GitHub\Rapid.NET\Source\OtherExamplesFramework\bin\Debug\OtherExamplesFramework.exe";
+            Assembly ass = Assembly.LoadFrom(assName);
+
+            Assembly[] all = new[] { ass, Assembly.GetEntryAssembly() };
+
+            LaunchMethods.RunFromArgs(all, args);
         }
 
     }

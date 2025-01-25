@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -32,25 +33,61 @@ namespace Rapid.NET
         /// containing JSON text representing the input arguments to supply 
         /// to your script's Run(...) method.</param>
         /// <param name="assy">An assembly to search for your script classes.</param>
-        public static void RunFromArgs(string[] args, 
+        public static void RunFromArgs(string[] args,
             Action<List<Script>> runUI, Func<string, string> readJsonFile,
             Assembly assy = null)
+        {
+            Assembly[] all = assy == null ? null : new Assembly[] { assy };
+            RunFromArgs(all, args, runUI, readJsonFile);
+        }
+
+        public static void RunFromArgs(Assembly[] assemblies, string[] args,
+            Action<List<Script>> runUI, Func<string, string> readJsonFile)
         {
             Print("args.Length = " + args.Length);
             foreach (string arg in args)
                 Print(arg);
 
-            if (assy == null)
-                assy = Assembly.GetEntryAssembly();
+            if (assemblies == null)
+                assemblies = new[] { Assembly.GetEntryAssembly() };
 
-            args = TryParseAttribute(assy, args, out Type attType);
+            //args = TryParseAttribute(assy, args, out Type attType);
+            args = TryParseAttributeFilter(args, out string attName);
 
-            List<Script> scripts = ListFromAssembly(assy, attType);
+            List<Script> scripts = GetAllScripts(assemblies, attName);
 
             if (args.Length > 0)
                 RunDirect(args, scripts, readJsonFile);
             else
                 runUI(scripts);
+        }
+
+		public static void RunFromArgs(Assembly[] assemblies, string[] args, Action<List<Script>> runUI)
+		{
+			ScriptMethods.RunFromArgs(assemblies, args, runUI, ReadFileIfExists);
+		}
+
+		public static void RunFromArgs(string[] args, Action<List<Script>> runUI, Assembly assy = null)
+		{
+			ScriptMethods.RunFromArgs(args, runUI, ReadFileIfExists, assy);
+		}
+
+		private static string ReadFileIfExists(string file)
+		{
+			if (File.Exists(file))
+				return File.ReadAllText(file);
+			else
+				return null;
+		}
+
+		public static List<Script> GetAllScripts(
+            Assembly[] assemblies, string attributeFilter = null)
+        {
+            var ret = new List<Script>();
+            foreach (Assembly a in assemblies)
+                ret.AddRange(ListFromAssembly(a, attributeFilter));
+
+            return ret;
         }
 
         public static void RunDirect(string[] args, List<Script> scripts,
@@ -75,6 +112,19 @@ namespace Rapid.NET
             }
             
             script.Run(argObj);
+        }
+
+        private static string[] TryParseAttributeFilter(string[] args, out string name)
+        {
+            name = null;
+            if (args.Length == 0)
+                return args;
+
+            if (!args[0].StartsWith("[") || !args[0].EndsWith("]"))
+                return args;
+
+            name = args[0].Trim('[', ']');
+            return args.Skip(1).ToArray();
         }
 
         private static string[] TryParseAttribute(Assembly assy,
@@ -136,6 +186,42 @@ namespace Rapid.NET
                 //{
                 //    Warn("Failed for: " + tt.Name);
                 //}
+
+                if (ti == null)
+                    continue;
+
+                Attribute attribute = ti.GetCustomAttribute(typeof(ScriptAttribute));
+                if (attribute == null)
+                    continue;
+
+                if (ti.IsAbstract)
+                    continue;
+
+                if (!Script.TryCreateFromType(ti, out Script s))
+                    continue;
+
+                if (attType != null && !s.HasAttribute(attType))
+                    continue;
+
+                result.Add(s);
+
+            }
+
+            return result;
+        }
+
+        public static List<Script> ListFromAssembly(
+            Assembly assembly, string attributeFilter = null)
+        {
+            var result = new List<Script>();
+
+            Type attType = null;
+            if (attributeFilter != null)
+                attType = assembly.GetType(attributeFilter, false);
+
+            foreach (Type tt in assembly.ExportedTypes)
+            {
+                TypeInfo ti = tt.GetTypeInfo();
 
                 if (ti == null)
                     continue;

@@ -9,12 +9,17 @@
     <PackageProjectUrl>https://github.com/maxsgit1234/Rapid.NET</PackageProjectUrl>
     <PackageTags>scripting prototyping</PackageTags>
     <PackageId>Rapid.NET</PackageId>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
     <Company />
     <Product>Rapid.NET</Product>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\Maxx\Documents\GitHub\Rapid.NET\Source\Rapid.NET\Rapid.NET.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DocumentationFile>C:\Users\Maxx\Documents\GitHub\Rapid.NET\Source\Rapid.NET\Rapid.NET.xml</DocumentationFile>
   </PropertyGroup>
 

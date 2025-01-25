@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rapid.NET.Core\Rapid.NET.Core.csproj" />
+    <ProjectReference Include="..\Rapid.NET.Wpf\Rapid.NET.Wpf.csproj" />
+    <ProjectReference Include="..\Rapid.NET\Rapid.NET.csproj" />
+  </ItemGroup>
+
+</Project>
