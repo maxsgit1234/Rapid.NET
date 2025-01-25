@@ -16,7 +16,29 @@
   <ItemGroup>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
-
-  <Import Project="..\Rapid.NET.Wpf.Library\Rapid.NET.Wpf.Library.projitems" Label="Shared" />
+  
+  <ItemGroup>
+    <Compile Update="Editors\ArgEditor.xaml.cs">
+      <DependentUpon>ArgEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Editors\ArrayEditor.xaml.cs">
+      <DependentUpon>ArrayEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Editors\DictionaryEditor.xaml.cs">
+      <DependentUpon>DictionaryEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Editors\EnumEditor.xaml.cs">
+      <DependentUpon>EnumEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Editors\NumericEditor.xaml.cs">
+      <DependentUpon>NumericEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Editors\StringEditor.xaml.cs">
+      <DependentUpon>StringEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ScriptLaunchForm.xaml.cs">
+      <DependentUpon>ScriptLaunchForm.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
 </Project>
