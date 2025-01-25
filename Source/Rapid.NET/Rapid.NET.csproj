@@ -3,16 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>maxsgit1234</Authors>
+    <Authors>doubledotmaxx</Authors>
     <Description>A framework for scripting and rapid prototyping in .NET.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/maxsgit1234/Rapid.NET</PackageProjectUrl>
     <PackageTags>scripting prototyping</PackageTags>
     <PackageId>Rapid.NET</PackageId>
-    <Version>1.0.8</Version>
+    <Version>1.1.0</Version>
     <Company />
     <Product>Rapid.NET</Product>
     <Platforms>AnyCPU;x64</Platforms>
+    <BaseOutputPath>..\bin</BaseOutputPath>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

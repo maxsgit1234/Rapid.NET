@@ -1,14 +1,8 @@
 ﻿using Rapid.NET;
 using Rapid.NET.Wpf;
-using Rapid.NET.Wpf.Core;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Rapid.Examples.Framework
 {
@@ -17,23 +11,28 @@ namespace Rapid.Examples.Framework
 		[STAThread]
 		static void Main(string[] args)
 		{
-			string assName = @"C:\Users\Maxx\Documents\GitHub\Rapid.NET\Source\Rapid.Examples.ScriptLibrary\bin\Debug\netstandard2.0\Rapid.Examples.ScriptLibrary.dll";
-			Assembly ass = Assembly.LoadFrom(assName);
-
-			Assembly[] all = new[] { ass, Assembly.GetEntryAssembly() };
-
-			ScriptMethods.RunFromArgs(all, args, LaunchMethods.RunUI);
-
+			// If you only want to use scripts defined in the current project,
+			// uncomment the line below:
 			//LaunchMethods.RunFromArgs(args);
+
+			// If you want to specify which assemblies should be included when looking for scripts:
+			string assName = Path.Combine(Environment.CurrentDirectory, "Rapid.Examples.ScriptLibrary.dll");
+			Assembly ass = Assembly.LoadFrom(assName);
+			Assembly[] all = new[] { ass, Assembly.GetEntryAssembly() };
+			LaunchMethods.RunFromArgs(all, args);
 		}
 
-		//private static void RunUI(List<Script> scripts)
-		//{
-		//	Window w = new Window();
-		//	var tree = new ScriptLaunchForm(w, scripts);
-		//	w.Content = tree;
-		//	w.ShowDialog();
-		//}
+	}
+
+	[Script]
+	public class FrameworkScriptExample
+	{
+
+		public static void Run()
+		{
+			Console.WriteLine("Hello from a .NET Framework-defined script class!");
+		}
+
 	}
 
 }
