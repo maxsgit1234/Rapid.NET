@@ -1,0 +1,7 @@
+Note to self on 2025-01-25:
+
+NuGet packages are now built automatically via project properties for both Rapid.NET and Rapid.NET.Wpf.
+
+When deploying, increment the package versions in the project properties for both projects and rebuild.
+The output will be 2 .nupkg files in the Source\bin\Nuget folder. Upload these to nuget.org after logging
+in as doubledotmaxx (logins saved in the chrome profile).
