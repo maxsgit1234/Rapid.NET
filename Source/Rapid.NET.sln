@@ -17,19 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapid.Core.Wpf", "Rapid.Cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExampleUsage", "ExampleUsage", "{C0FD865B-D64B-4325-B083-E4C10EBA6C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rapid.Examples.ScriptLibrary", "Rapid.Examples.ScriptLibrary\Rapid.Examples.ScriptLibrary.csproj", "{EFFE1F17-8B0D-49BE-B435-F94C24D79226}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapid.Examples.ScriptLibrary", "Rapid.Examples.ScriptLibrary\Rapid.Examples.ScriptLibrary.csproj", "{EFFE1F17-8B0D-49BE-B435-F94C24D79226}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rapid.Examples.Framework", "Rapid.Examples.Framework\Rapid.Examples.Framework.csproj", "{A511D539-448E-4423-8F2B-C35B9778CDCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rapid.Examples.NET", "Rapid.Examples.NET\Rapid.Examples.NET.csproj", "{8D348CC8-0D86-4303-B2CA-B2DC55794D32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapid.Examples.NET", "Rapid.Examples.NET\Rapid.Examples.NET.csproj", "{8D348CC8-0D86-4303-B2CA-B2DC55794D32}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Obsolete", "Obsolete", "{02F00080-B001-480D-B6E0-4FAEEDC8CC95}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Rapid.NET.Wpf.Library", "Rapid.NET.Wpf.Library\Rapid.NET.Wpf.Library.shproj", "{C70C55B7-1937-4C53-A676-1AF8A07826EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rapid.NET.WPf.Framework", "Rapid.NET.WPf.Framework\Rapid.NET.WPf.Framework.csproj", "{DE3635E2-DDA7-48FA-9988-975FE234EE9A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rapid.NET.Wpf.Core", "Rapid.NET.Wpf.Core\Rapid.NET.Wpf.Core.csproj", "{E1706C51-D3BE-420F-8D69-A3D3A1185A54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapid.NET.Wpf.Core", "Rapid.NET.Wpf.Core\Rapid.NET.Wpf.Core.csproj", "{E1706C51-D3BE-420F-8D69-A3D3A1185A54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,14 +109,6 @@ Global
 		{8D348CC8-0D86-4303-B2CA-B2DC55794D32}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D348CC8-0D86-4303-B2CA-B2DC55794D32}.Release|x64.ActiveCfg = Release|Any CPU
 		{8D348CC8-0D86-4303-B2CA-B2DC55794D32}.Release|x64.Build.0 = Release|Any CPU
-		{DE3635E2-DDA7-48FA-9988-975FE234EE9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE3635E2-DDA7-48FA-9988-975FE234EE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE3635E2-DDA7-48FA-9988-975FE234EE9A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DE3635E2-DDA7-48FA-9988-975FE234EE9A}.Debug|x64.Build.0 = Debug|Any CPU
-		{DE3635E2-DDA7-48FA-9988-975FE234EE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE3635E2-DDA7-48FA-9988-975FE234EE9A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE3635E2-DDA7-48FA-9988-975FE234EE9A}.Release|x64.ActiveCfg = Release|Any CPU
-		{DE3635E2-DDA7-48FA-9988-975FE234EE9A}.Release|x64.Build.0 = Release|Any CPU
 		{E1706C51-D3BE-420F-8D69-A3D3A1185A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E1706C51-D3BE-420F-8D69-A3D3A1185A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1706C51-D3BE-420F-8D69-A3D3A1185A54}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -144,7 +134,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Rapid.NET.Wpf.Library\Rapid.NET.Wpf.Library.projitems*{c70c55b7-1937-4c53-a676-1af8a07826eb}*SharedItemsImports = 13
-		Rapid.NET.Wpf.Library\Rapid.NET.Wpf.Library.projitems*{de3635e2-dda7-48fa-9988-975fe234ee9a}*SharedItemsImports = 4
 		Rapid.NET.Wpf.Library\Rapid.NET.Wpf.Library.projitems*{e1706c51-d3be-420f-8d69-a3d3a1185a54}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

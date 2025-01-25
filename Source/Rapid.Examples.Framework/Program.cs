@@ -1,5 +1,6 @@
 ﻿using Rapid.NET;
 using Rapid.NET.Wpf;
+using Rapid.NET.Wpf.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,18 +22,18 @@ namespace Rapid.Examples.Framework
 
 			Assembly[] all = new[] { ass, Assembly.GetEntryAssembly() };
 
-			ScriptMethods.RunFromArgs(all, args, RunUI);
+			ScriptMethods.RunFromArgs(all, args, LaunchMethods.RunUI);
 
 			//LaunchMethods.RunFromArgs(args);
 		}
 
-		private static void RunUI(List<Script> scripts)
-		{
-			Window w = new Window();
-			var tree = new ScriptLaunchForm(w, scripts);
-			w.Content = tree;
-			w.ShowDialog();
-		}
+		//private static void RunUI(List<Script> scripts)
+		//{
+		//	Window w = new Window();
+		//	var tree = new ScriptLaunchForm(w, scripts);
+		//	w.Content = tree;
+		//	w.ShowDialog();
+		//}
 	}
 
 }

@@ -1,5 +1,6 @@
 ﻿using Rapid.NET;
 using Rapid.NET.Wpf;
+using Rapid.NET.Wpf.Core;
 using System.Reflection;
 using System.Windows;
 
@@ -15,7 +16,7 @@ namespace Rapid.Examples.NET
 
 			Assembly[] all = new[] { ass, Assembly.GetEntryAssembly() };
 
-			ScriptMethods.RunFromArgs(all, args, RunUI);
+			ScriptMethods.RunFromArgs(all, args, LaunchMethods.RunUI);
 
 			//LaunchMethods.RunFromArgs(args);
 		}
