@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rapid.Examples.Framework", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapid.Examples.NET", "Rapid.Examples.NET\Rapid.Examples.NET.csproj", "{8D348CC8-0D86-4303-B2CA-B2DC55794D32}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapid.NET.Wpf.Core", "Rapid.NET.Wpf.Core\Rapid.NET.Wpf.Core.csproj", "{E1706C51-D3BE-420F-8D69-A3D3A1185A54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapid.NET.Wpf", "Rapid.NET.Wpf.Core\Rapid.NET.Wpf.csproj", "{E1706C51-D3BE-420F-8D69-A3D3A1185A54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Rapid.Examples.ScriptLibrary\Rapid.Examples.ScriptLibrary.csproj" />
-    <ProjectReference Include="..\Rapid.NET.Wpf.Core\Rapid.NET.Wpf.Core.csproj" />
+    <ProjectReference Include="..\Rapid.NET.Wpf.Core\Rapid.NET.Wpf.csproj" />
     <ProjectReference Include="..\Rapid.NET\Rapid.NET.csproj" />
   </ItemGroup>
 
