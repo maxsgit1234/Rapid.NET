@@ -90,7 +90,7 @@
       <Project>{effe1f17-8b0d-49be-b435-f94c24d79226}</Project>
       <Name>Rapid.Examples.ScriptLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Rapid.NET.Wpf.Core\Rapid.NET.Wpf.csproj">
+    <ProjectReference Include="..\Rapid.NET.Wpf\Rapid.NET.Wpf.csproj">
       <Project>{e1706c51-d3be-420f-8d69-a3d3a1185a54}</Project>
       <Name>Rapid.NET.Wpf</Name>
     </ProjectReference>

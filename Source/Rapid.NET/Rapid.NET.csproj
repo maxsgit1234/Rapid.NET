@@ -15,6 +15,8 @@
     <Platforms>AnyCPU;x64</Platforms>
     <BaseOutputPath>..\bin</BaseOutputPath>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageOutputPath>..\bin\Nuget</PackageOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -24,6 +26,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DocumentationFile>C:\Users\Maxx\Documents\GitHub\Rapid.NET\Source\Rapid.NET\Rapid.NET.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="5.0.2" />

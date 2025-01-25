@@ -54,7 +54,7 @@ namespace Rapid.NET
             //args = TryParseAttribute(assy, args, out Type attType);
             args = TryParseAttributeFilter(args, out string attName);
 
-            List<Script> scripts = GetAllScripts(assemblies, attName);
+            List<Script> scripts = ListFromAssemblies(assemblies, attName);
 
             if (args.Length > 0)
                 RunDirect(args, scripts, readJsonFile);
@@ -64,12 +64,12 @@ namespace Rapid.NET
 
 		public static void RunFromArgs(Assembly[] assemblies, string[] args, Action<List<Script>> runUI)
 		{
-			ScriptMethods.RunFromArgs(assemblies, args, runUI, ReadFileIfExists);
+			RunFromArgs(assemblies, args, runUI, ReadFileIfExists);
 		}
 
 		public static void RunFromArgs(string[] args, Action<List<Script>> runUI, Assembly assy = null)
 		{
-			ScriptMethods.RunFromArgs(args, runUI, ReadFileIfExists, assy);
+			RunFromArgs(args, runUI, ReadFileIfExists, assy);
 		}
 
 		private static string ReadFileIfExists(string file)
@@ -80,7 +80,13 @@ namespace Rapid.NET
 				return null;
 		}
 
-		public static List<Script> GetAllScripts(
+        /// <summary>
+        /// Find scripts defined in any of the specified assemblies.
+        /// </summary>
+        /// <param name="assemblies"></param>
+        /// <param name="attributeFilter"></param>
+        /// <returns></returns>
+		public static List<Script> ListFromAssemblies(
             Assembly[] assemblies, string attributeFilter = null)
         {
             var ret = new List<Script>();
@@ -90,6 +96,15 @@ namespace Rapid.NET
             return ret;
         }
 
+        /// <summary>
+        /// Run the script specified in args. Look for its class definition
+        /// from among the input list of scripts.
+        /// </summary>
+        /// <param name="args">The first argument is the name of the script. 
+        /// The rest are passed into the execution of the script itself.</param>
+        /// <param name="scripts"></param>
+        /// <param name="readJsonFile"></param>
+        /// <exception cref="Exception"></exception>
         public static void RunDirect(string[] args, List<Script> scripts,
             Func<string, string> readJsonFile)
         {
@@ -210,6 +225,12 @@ namespace Rapid.NET
             return result;
         }
 
+        /// <summary>
+        /// Find script-classes defined in the specified assembly.
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <param name="attributeFilter"></param>
+        /// <returns></returns>
         public static List<Script> ListFromAssembly(
             Assembly assembly, string attributeFilter = null)
         {

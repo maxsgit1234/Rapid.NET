@@ -44,6 +44,25 @@
             to your script's Run(...) method.</param>
             <param name="assy">An assembly to search for your script classes.</param>
         </member>
+        <member name="M:Rapid.NET.ScriptMethods.ListFromAssemblies(System.Reflection.Assembly[],System.String)">
+            <summary>
+            Find scripts defined in any of the specified assemblies.
+            </summary>
+            <param name="assemblies"></param>
+            <param name="attributeFilter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rapid.NET.ScriptMethods.RunDirect(System.String[],System.Collections.Generic.List{Rapid.NET.Script},System.Func{System.String,System.String})">
+            <summary>
+            Run the script specified in args. Look for its class definition
+            from among the input list of scripts.
+            </summary>
+            <param name="args">The first argument is the name of the script. 
+            The rest are passed into the execution of the script itself.</param>
+            <param name="scripts"></param>
+            <param name="readJsonFile"></param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
         <member name="M:Rapid.NET.ScriptMethods.ListFromAssembly(System.Reflection.Assembly,System.Type)">
             <summary>
             Enumerates all valid script classes defined in the supplied assembly.
@@ -52,6 +71,14 @@
             <param name="attType">If non-null, the type of an attribute to use 
             to filter your set of scripts. Only script classes with this 
             attribute applied will be listed.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rapid.NET.ScriptMethods.ListFromAssembly(System.Reflection.Assembly,System.String)">
+            <summary>
+            Find script-classes defined in the specified assembly.
+            </summary>
+            <param name="assembly"></param>
+            <param name="attributeFilter"></param>
             <returns></returns>
         </member>
     </members>
